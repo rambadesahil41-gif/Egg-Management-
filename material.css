@@ -1,0 +1,329 @@
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f4f6f9;
+  padding:20px;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+  width:100%;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   HEADING
+========================= */
+
+h1{
+  font-size:42px;
+  margin-bottom:25px;
+  color:#111;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn{
+  background:#ff6600;
+  color:white;
+  border:none;
+  padding:14px 22px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:18px;
+  margin-bottom:25px;
+  transition:0.3s;
+}
+
+.back-btn:hover{
+  background:#e65c00;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form{
+  display:grid;
+
+  grid-template-columns:
+  1.5fr
+  1fr
+  140px
+  1fr
+  180px
+  180px;
+
+  gap:15px;
+  margin-bottom:25px;
+  align-items:center;
+}
+
+/* INPUTS */
+
+.form input,
+.form select{
+  width:100%;
+  height:55px;
+  padding:14px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:16px;
+  outline:none;
+  background:white;
+}
+
+/* FOCUS */
+
+.form input:focus,
+.form select:focus{
+  border-color:#ff6600;
+  box-shadow:0 0 5px rgba(255,102,0,0.3);
+}
+
+/* ADD BUTTON */
+
+.form button{
+  width:100%;
+  height:55px;
+  background:#ff6600;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 20px;
+}
+
+.form button:hover{
+  background:#e65c00;
+  transform:scale(1.02);
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container{
+  width:100%;
+  overflow-x:auto;
+  border-radius:12px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1000px;
+  overflow:hidden;
+}
+
+table th{
+  background:#ff6600;
+  color:white;
+  padding:16px;
+  font-size:18px;
+  text-align:center;
+}
+
+table td{
+  padding:16px;
+  border-bottom:1px solid #eee;
+  text-align:center;
+  font-size:16px;
+}
+
+table tr:hover{
+  background:#fff5ee;
+}
+
+/* =========================
+   TOTAL BOX
+========================= */
+
+.total-box{
+  margin-top:25px;
+  background:#fff7f2;
+  padding:20px;
+  border-radius:12px;
+}
+
+.total-box h2{
+  font-size:36px;
+  color:#111;
+}
+
+#totalMaterialCost{
+  color:#000000;
+}
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-btn{
+  background:red;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.delete-btn:hover{
+  background:#cc0000;
+}
+
+/* =========================
+   TABLE EMPTY STATE
+========================= */
+
+.empty{
+  text-align:center;
+  color:gray;
+  padding:20px;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+  .form{
+
+    grid-template-columns:
+    1fr
+    1fr;
+
+  }
+
+}
+
+@media(max-width:768px){
+
+  body{
+    padding:10px;
+  }
+
+  .container{
+    padding:15px;
+  }
+
+  h1{
+    font-size:28px;
+    text-align:center;
+  }
+
+  .back-btn{
+    width:100%;
+    font-size:15px;
+    padding:12px;
+  }
+
+  .form{
+    grid-template-columns:1fr;
+  }
+
+  .form input,
+  .form select,
+  .form button{
+    width:100%;
+    font-size:15px;
+  }
+
+  .form button{
+    padding:14px;
+    height:52px;
+  }
+
+  .table-container{
+    overflow-x:auto;
+  }
+
+  table{
+    min-width:700px;
+  }
+
+  table th{
+    font-size:14px;
+    padding:12px;
+  }
+
+  table td{
+    font-size:13px;
+    padding:12px;
+  }
+
+  .total-box h2{
+    font-size:26px;
+    text-align:center;
+  }
+
+}
+
+@media(max-width:480px){
+
+  h1{
+    font-size:24px;
+  }
+
+  .container{
+    padding:12px;
+  }
+
+  .back-btn{
+    font-size:14px;
+  }
+
+  .form{
+    gap:12px;
+  }
+
+  .form input,
+  .form select{
+    padding:12px;
+    font-size:14px;
+  }
+
+  .form button{
+    padding:12px;
+    font-size:15px;
+    height:50px;
+  }
+
+  table{
+    min-width:600px;
+  }
+
+  .total-box{
+    padding:15px;
+  }
+
+  .total-box h2{
+    font-size:22px;
+  }
+
+}

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard</title>
+
+  <link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+
+  <div class="sidebar">
+
+    <h2>
+
+      Poultry Admin
+
+    </h2>
+
+    <a href="dashboard.html">
+
+      Orders
+
+    </a>
+
+    <a href="material.html">
+
+      Material
+
+    </a>
+
+    <!-- MONTHLY REPORT -->
+
+    <a href="report.html">
+
+      Monthly Report
+
+    </a>
+
+    <!-- LOGOUT -->
+    <button id="logoutBtn">
+
+      Logout
+
+    </button>
+
+  </div>
+
+  <!-- MAIN -->
+
+  <div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+      <h1>
+
+        Orders Management
+
+      </h1>
+
+    </div>
+
+    <!-- ADD ORDER FORM -->
+
+    <div class="form-box">
+
+      <!-- CUSTOMER NAME -->
+
+      <input type="text" id="customerName" placeholder="Customer Name">
+
+      <!-- TRAY PRICE -->
+
+      <input type="number" id="trayPrice" placeholder="Tray Price">
+
+      <!-- TRAY QTY -->
+
+      <input type="number" id="trayQty" placeholder="Tray Quantity">
+
+      <!-- DATE -->
+
+      <input type="date" id="date">
+
+      <!-- ORDER STATUS -->
+
+      <select id="status">
+
+        <option>
+
+          Pending
+
+        </option>
+
+        <option>
+
+          Complete
+
+        </option>
+
+      </select>
+
+      <!-- PAYMENT TYPE -->
+
+      <select id="payment">
+
+        <option>
+
+          Cash
+
+        </option>
+
+        <option>
+
+          Online
+
+        </option>
+
+      </select>
+
+      <!-- MONEY STATUS -->
+
+      <select id="moneyStatus">
+
+        <option>
+
+          Pending
+
+        </option>
+
+        <option>
+
+          Paid
+
+        </option>
+
+      </select>
+
+      <!-- BUTTON -->
+      <button id="addOrderBtn">
+
+        Add Order
+
+      </button>
+
+    </div>
+
+    <!-- =========================
+         PENDING TABLE
+    ========================= -->
+
+    <div class="table-container">
+
+      <h2 class="table-title">
+
+        Pending Orders / Money Pending
+
+      </h2>
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Sr No</th>
+
+            <th>Customer</th>
+
+            <th>Tray Price</th>
+
+            <th>Tray Qty</th>
+
+            <th>Total</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+            <th>Payment</th>
+
+            <th>Money Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="pendingTable">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- =========================
+         COMPLETE TABLE
+    ========================= -->
+
+    <div class="table-container complete-table">
+
+      <h2 class="table-title">
+
+        Complete Orders
+
+      </h2>
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Sr No</th>
+
+            <th>Customer</th>
+
+            <th>Tray Price</th>
+
+            <th>Tray Qty</th>
+
+            <th>Total</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+            <th>Payment</th>
+
+            <th>Money Status</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="completeTable">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- TOTAL PROFIT -->
+
+    <div class="profit-box">
+
+      <h2>
+
+        Total Profit :
+
+        ₹<span id="totalProfit">
+
+          0
+
+        </span>
+
+      </h2>
+
+    </div>
+
+  </div>
+  <div id="toast">
+
+  </div>
+
+  <!-- SCRIPT -->
+
+  <script type="module" src="dashboard.js"></script>
+
+
+
+</body>
+
+</html>

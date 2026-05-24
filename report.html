@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>Reports</title>
+
+  <link rel="stylesheet"
+  href="report.css">
+
+  <!-- CHART JS -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+
+  </script>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+      <h1>
+
+        Monthly Profit & Expense Report
+
+      </h1>
+
+      <!-- BUTTONS -->
+
+      <div class="top-buttons">
+
+        <!-- DASHBOARD -->
+
+        <button
+        class="dashboard-btn"
+
+        onclick="
+        window.location.href=
+        'dashboard.html'
+        ">
+
+          🏠 Dashboard
+
+        </button>
+
+        <!-- MATERIAL -->
+
+        <button
+        class="material-btn"
+
+        onclick="
+        window.location.href=
+        'material.html'
+        ">
+
+          📦 Material
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- SUMMARY CARDS -->
+
+    <div class="cards">
+
+      <div class="card income">
+
+        <h2>
+
+          Total Profit
+
+        </h2>
+
+        <h1>
+
+          ₹<span id="totalProfit">
+
+            0
+
+          </span>
+
+        </h1>
+
+      </div>
+
+      <div class="card expense">
+
+        <h2>
+
+          Total Expense
+
+        </h2>
+
+        <h1>
+
+          ₹<span id="totalExpense">
+
+            0
+
+          </span>
+
+        </h1>
+
+      </div>
+
+      <div class="card balance">
+
+        <h2>
+
+          Net Balance
+
+        </h2>
+
+        <h1>
+
+          ₹<span id="netBalance">
+
+            0
+
+          </span>
+
+        </h1>
+
+      </div>
+
+    </div>
+
+    <!-- GRAPH -->
+
+    <div class="chart-box">
+
+      <canvas id="financeChart">
+
+      </canvas>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-box">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Month</th>
+
+            <th>Profit</th>
+
+            <th>Expense</th>
+
+            <th>Balance</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="reportTable">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+
+  <script
+  type="module"
+
+  src="report.js">
+
+  </script>
+
+</body>
+
+</html>

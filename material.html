@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>Material Panel</title>
+
+  <link rel="stylesheet"
+  href="material.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- HEADING -->
+
+    <h1>
+
+      Material Management
+
+    </h1>
+
+    <!-- BACK BUTTON -->
+
+    <button
+    class="back-btn"
+
+    onclick="
+    window.location.href=
+    'dashboard.html'
+    ">
+
+      ← Back To Dashboard
+
+    </button>
+
+    <!-- FORM -->
+
+    <div class="form">
+
+      <!-- MATERIAL NAME -->
+
+      <input
+      type="text"
+
+      id="materialName"
+
+      placeholder="Material Name">
+
+      <!-- QUANTITY -->
+
+      <input
+      type="number"
+
+      id="materialQty"
+
+      placeholder="Quantity">
+
+      <!-- UNIT -->
+
+      <select id="materialUnit">
+
+        <option value="Kg">
+
+          Kg
+
+        </option>
+
+        <option value="Litre">
+
+          Litre
+
+        </option>
+
+      </select>
+
+      <!-- PRICE PER UNIT -->
+
+      <input
+      type="number"
+
+      id="materialPrice"
+
+      placeholder="Price Per Unit">
+
+      <!-- DATE OPTION -->
+
+      <input
+      type="date"
+
+      id="materialDate">
+
+      <!-- BUTTON -->
+
+      <button
+      id="addMaterialBtn">
+
+        Add Material
+
+      </button>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Sr No</th>
+
+            <th>Date</th>
+
+            <th>Material</th>
+
+            <th>Quantity</th>
+
+            <th>Unit</th>
+
+            <th>Price / Unit</th>
+
+            <th>Overall Price</th>
+
+            <th>Action</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="materialTable">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- TOTAL MATERIAL COST -->
+
+    <div class="total-box">
+
+      <h2>
+
+        Total Material Cost :
+
+        ₹<span id="totalMaterialCost">
+
+          0
+
+        </span>
+
+      </h2>
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+
+  <script
+  type="module"
+
+  src="material.js">
+
+  </script>
+
+</body>
+
+</html>

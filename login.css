@@ -1,0 +1,413 @@
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body{
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+  linear-gradient(
+    135deg,
+    #ff7b00,
+    #ffb347,
+    #ffd54f
+  );
+
+  overflow:hidden;
+  padding:20px;
+
+  position:relative;
+
+}
+
+/* =========================
+   BACKGROUND CIRCLES
+========================= */
+
+body::before,
+body::after{
+
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  filter:blur(50px);
+  z-index:0;
+
+}
+
+body::before{
+
+  width:250px;
+  height:250px;
+
+  background:#ff5722;
+
+  top:-60px;
+  left:-60px;
+
+}
+
+body::after{
+
+  width:300px;
+  height:300px;
+
+  background:#fff176;
+
+  bottom:-80px;
+  right:-80px;
+
+}
+
+/* =========================
+   LOGIN CONTAINER
+========================= */
+
+.login-container{
+
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  z-index:1;
+
+}
+
+/* =========================
+   LOGIN BOX
+========================= */
+
+.login-box{
+
+  width:100%;
+  max-width:420px;
+
+  background:rgba(255,255,255,0.18);
+
+  backdrop-filter:blur(15px);
+
+  border:1px solid rgba(255,255,255,0.3);
+
+  padding:40px 30px;
+
+  border-radius:25px;
+
+  box-shadow:
+  0 8px 32px rgba(0,0,0,0.2);
+
+  animation:fadeIn 0.7s ease;
+
+}
+
+/* =========================
+   HEADING
+========================= */
+
+.login-box h1{
+
+  text-align:center;
+
+  font-size:34px;
+
+  color:white;
+
+  margin-bottom:30px;
+
+  letter-spacing:1px;
+
+  line-height:1.3;
+
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.login-box input{
+
+  width:100%;
+
+  padding:14px 16px;
+
+  margin-bottom:18px;
+
+  border:none;
+
+  border-radius:12px;
+
+  outline:none;
+
+  background:rgba(255,255,255,0.9);
+
+  font-size:15px;
+
+  transition:0.3s;
+
+}
+
+.login-box input:focus{
+
+  transform:scale(1.02);
+
+  box-shadow:
+  0 0 10px rgba(255,255,255,0.8);
+
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.login-box button{
+
+  width:100%;
+
+  padding:14px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:#ff6600;
+
+  color:white;
+
+  font-size:17px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+}
+
+.login-box button:hover{
+
+  background:#e65c00;
+
+  transform:translateY(-2px);
+
+  box-shadow:
+  0 8px 18px rgba(0,0,0,0.2);
+
+}
+
+/* =========================
+   ERROR TEXT
+========================= */
+
+#error{
+
+  color:#fff;
+
+  margin-top:15px;
+
+  text-align:center;
+
+  font-size:14px;
+
+  word-break:break-word;
+
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeIn{
+
+  from{
+
+    opacity:0;
+    transform:translateY(20px);
+
+  }
+
+  to{
+
+    opacity:1;
+    transform:translateY(0);
+
+  }
+
+}
+
+/* =========================
+   TABLET RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+  body{
+
+    padding:18px;
+
+    overflow:auto;
+
+  }
+
+  .login-box{
+
+    max-width:100%;
+
+    padding:35px 22px;
+
+    border-radius:22px;
+
+  }
+
+  .login-box h1{
+
+    font-size:28px;
+
+    margin-bottom:25px;
+
+  }
+
+  .login-box input{
+
+    padding:13px 14px;
+
+    font-size:15px;
+
+  }
+
+  .login-box button{
+
+    padding:13px;
+
+    font-size:16px;
+
+  }
+
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media(max-width:480px){
+
+  body{
+
+    padding:15px;
+
+    align-items:center;
+
+  }
+
+  .login-container{
+
+    width:100%;
+
+  }
+
+  .login-box{
+
+    width:100%;
+
+    padding:28px 18px;
+
+    border-radius:20px;
+
+  }
+
+  .login-box h1{
+
+    font-size:24px;
+
+    margin-bottom:22px;
+
+  }
+
+  .login-box input{
+
+    padding:12px;
+
+    font-size:14px;
+
+    border-radius:10px;
+
+  }
+
+  .login-box button{
+
+    padding:12px;
+
+    font-size:15px;
+
+    border-radius:10px;
+
+  }
+
+  #error{
+
+    font-size:13px;
+
+  }
+
+  body::before{
+
+    width:180px;
+    height:180px;
+
+  }
+
+  body::after{
+
+    width:220px;
+    height:220px;
+
+  }
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:360px){
+
+  .login-box{
+
+    padding:24px 15px;
+
+  }
+
+  .login-box h1{
+
+    font-size:21px;
+
+  }
+
+  .login-box input{
+
+    font-size:13px;
+
+  }
+
+  .login-box button{
+
+    font-size:14px;
+
+  }
+
+}
