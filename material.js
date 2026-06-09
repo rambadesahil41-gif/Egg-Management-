@@ -1,22 +1,58 @@
 import { db } from "./firebase.js";
 
 import {
-
   collection,
   addDoc,
   getDocs,
   deleteDoc,
   doc
-
-} from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // =========================
 // MATERIALS ARRAY
 // =========================
 
 let materials = [];
+let deleteMaterialId = null;
+// =========================
+// TOAST
+// =========================
 
+function showToast(message) {
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  toast.innerText =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  setTimeout(() => {
+
+    toast.classList.remove(
+      "show"
+    );
+
+  }, 2000);
+
+}
+
+function showDeleteToast() {
+
+  document
+    .getElementById(
+      "deleteToast"
+    )
+    .classList.add(
+      "show"
+    );
+
+}
 // =========================
 // ADD MATERIAL
 // =========================
@@ -24,57 +60,46 @@ let materials = [];
 async function addMaterial() {
 
   let materialName =
-  document.getElementById(
-    "materialName"
-  ).value.trim();
+    document.getElementById("materialName")
+      .value.trim();
 
   let materialQty =
-  document.getElementById(
-    "materialQty"
-  ).value.trim();
+    document.getElementById("materialQty")
+      .value.trim();
 
   let materialUnit =
-  document.getElementById(
-    "materialUnit"
-  ).value;
+    document.getElementById("materialUnit")
+      .value;
 
   let materialPrice =
-  document.getElementById(
-    "materialPrice"
-  ).value.trim();
-
-  // DATE
+    document.getElementById("materialPrice")
+      .value.trim();
 
   let materialDate =
-  document.getElementById(
-    "materialDate"
-  ).value;
-
+    document.getElementById("materialDate")
+      .value;
+  showToast(
+    "Material Added Successfully"
+  );
   // VALIDATION
 
   if (
-
     materialName === "" ||
-
     materialQty === "" ||
-
     materialPrice === "" ||
-
     materialDate === ""
-
   ) {
-
     return;
-
   }
 
-  // OVERALL PRICE
+  // OVERALL PRICE (2 DECIMAL)
 
-  let overallPrice =
-
-  Number(materialQty) *
-
-  Number(materialPrice);
+  let overallPrice = Number(
+    (
+      Number(materialQty) *
+      Number(materialPrice)
+    ).toFixed(2)
+  );
 
   // MATERIAL OBJECT
 
@@ -83,12 +108,15 @@ async function addMaterial() {
     materialName,
 
     materialQty:
-    Number(materialQty),
+      Number(materialQty),
 
     materialUnit,
 
     materialPrice:
-    Number(materialPrice),
+      Number(
+        Number(materialPrice)
+          .toFixed(2)
+      ),
 
     materialDate,
 
@@ -98,14 +126,9 @@ async function addMaterial() {
 
   try {
 
-    // SAVE FIREBASE
-
     await addDoc(
-
-      collection(db,"materials"),
-
+      collection(db, "materials"),
       material
-
     );
 
     // CLEAR INPUTS
@@ -126,13 +149,10 @@ async function addMaterial() {
       "materialDate"
     ).value = "";
 
-    // RELOAD
-
     loadMaterials();
 
   }
-
-  catch(error){
+  catch (error) {
 
     console.log(error);
 
@@ -147,9 +167,9 @@ async function addMaterial() {
 async function loadMaterials() {
 
   let table =
-  document.getElementById(
-    "materialTable"
-  );
+    document.getElementById(
+      "materialTable"
+    );
 
   table.innerHTML = "";
 
@@ -157,19 +177,15 @@ async function loadMaterials() {
 
   try {
 
-    // GET FIREBASE DATA
-
     const querySnapshot =
-    await getDocs(
-
-      collection(db,"materials")
-
-    );
+      await getDocs(
+        collection(db, "materials")
+      );
 
     materials = [];
 
     querySnapshot.forEach(
-      (docItem)=>{
+      (docItem) => {
 
         materials.push({
 
@@ -187,23 +203,16 @@ async function loadMaterials() {
     if (materials.length === 0) {
 
       table.innerHTML = `
-
         <tr>
-
-          <td colspan="8"
-          class="empty">
-
+          <td colspan="8" class="empty">
             No Material Found
-
           </td>
-
         </tr>
-
       `;
 
       document.getElementById(
         "totalMaterialCost"
-      ).innerText = 0;
+      ).innerText = "0.00";
 
       return;
 
@@ -212,65 +221,51 @@ async function loadMaterials() {
     // LOOP MATERIALS
 
     materials.forEach(
-      (material,index)=>{
-
-        // TOTAL COST
+      (material, index) => {
 
         totalMaterialCost +=
-        Number(
-          material.overallPrice
-        );
-
-        // TABLE ROW
+          Number(
+            material.overallPrice || 0
+          );
 
         table.innerHTML += `
-
           <tr>
 
             <td>${index + 1}</td>
 
             <td>
-
               ${material.materialDate || "-"}
-
             </td>
 
             <td>
-
               ${material.materialName}
-
             </td>
 
             <td>
-
               ${material.materialQty}
-
             </td>
 
             <td>
-
               ${material.materialUnit}
-
             </td>
 
             <td>
-
-              ₹${material.materialPrice}
-
+              ₹${Number(
+          material.materialPrice || 0
+        ).toFixed(2)}
             </td>
 
             <td>
-
-              ₹${material.overallPrice}
-
+              ₹${Number(
+          material.overallPrice || 0
+        ).toFixed(2)}
             </td>
 
             <td>
 
               <button
-              class="delete-btn material-delete"
-
-              data-id="${material.id}">
+                class="delete-btn material-delete"
+                data-id="${material.id}">
 
                 Delete
 
@@ -279,7 +274,6 @@ async function loadMaterials() {
             </td>
 
           </tr>
-
         `;
 
       }
@@ -288,40 +282,36 @@ async function loadMaterials() {
     // DELETE BUTTONS
 
     document
-    .querySelectorAll(
-      ".material-delete"
-    )
+      .querySelectorAll(
+        ".material-delete"
+      )
+      .forEach(button => {
 
-    .forEach(button => {
+        button.addEventListener(
+          "click",
 
-      button.addEventListener(
+          () => {
 
-        "click",
+            deleteMaterialId =
+              button.dataset.id;
 
-        async ()=>{
+            showDeleteToast();
 
-          await deleteMaterial(
+          }
 
-            button.dataset.id
+        );
 
-          );
+      });
 
-        }
-
-      );
-
-    });
-
-    // SHOW TOTAL COST
+    // TOTAL COST (2 DECIMAL)
 
     document.getElementById(
       "totalMaterialCost"
     ).innerText =
-    totalMaterialCost;
+      totalMaterialCost.toFixed(2);
 
   }
-
-  catch(error){
+  catch (error) {
 
     console.log(error);
 
@@ -338,20 +328,21 @@ async function deleteMaterial(id) {
   try {
 
     await deleteDoc(
-
       doc(
         db,
         "materials",
         id
       )
+    );
 
+    showToast(
+      "Material Deleted Successfully"
     );
 
     loadMaterials();
 
   }
-
-  catch(error){
+  catch (error) {
 
     console.log(error);
 
@@ -366,12 +357,64 @@ async function deleteMaterial(id) {
 loadMaterials();
 
 // =========================
-// BUTTON EVENTS
+// BUTTON EVENT
 // =========================
 
 document
-.getElementById("addMaterialBtn")
-.addEventListener(
-  "click",
-  addMaterial
-);
+  .getElementById(
+    "addMaterialBtn"
+  )
+  .addEventListener(
+    "click",
+    addMaterial
+  );
+
+document
+  .getElementById(
+    "confirmDeleteBtn"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      if (deleteMaterialId) {
+
+        await deleteMaterial(
+          deleteMaterialId
+        );
+
+        deleteMaterialId = null;
+
+      }
+
+      document
+        .getElementById(
+          "deleteToast"
+        )
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+document
+  .getElementById(
+    "cancelDeleteBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      deleteMaterialId = null;
+
+      document
+        .getElementById(
+          "deleteToast"
+        )
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
