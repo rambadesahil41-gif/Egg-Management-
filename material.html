@@ -5,13 +5,11 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-  content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Material Panel</title>
 
-  <link rel="stylesheet"
-  href="material.css">
+  <link rel="stylesheet" href="material.css">
 
 </head>
 
@@ -29,10 +27,7 @@
 
     <!-- BACK BUTTON -->
 
-    <button
-    class="back-btn"
-
-    onclick="
+    <button class="back-btn" onclick="
     window.location.href=
     'dashboard.html'
     ">
@@ -47,21 +42,11 @@
 
       <!-- MATERIAL NAME -->
 
-      <input
-      type="text"
-
-      id="materialName"
-
-      placeholder="Material Name">
+      <input type="text" id="materialName" placeholder="Material Name">
 
       <!-- QUANTITY -->
 
-      <input
-      type="number"
-
-      id="materialQty"
-
-      placeholder="Quantity">
+      <input type="number" id="materialQty" placeholder="Quantity">
 
       <!-- UNIT -->
 
@@ -83,24 +68,15 @@
 
       <!-- PRICE PER UNIT -->
 
-      <input
-      type="number"
-
-      id="materialPrice"
-
-      placeholder="Price Per Unit">
+      <input type="number" id="materialPrice" placeholder="Price Per Unit">
 
       <!-- DATE OPTION -->
 
-      <input
-      type="date"
-
-      id="materialDate">
+      <input type="date" id="materialDate">
 
       <!-- BUTTON -->
 
-      <button
-      id="addMaterialBtn">
+      <button id="addMaterialBtn">
 
         Add Material
 
@@ -165,13 +141,31 @@
     </div>
 
   </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <div id="deleteToast" class="delete-toast">
+
+    <span>
+      Delete this material?
+    </span>
+
+    <button id="confirmDeleteBtn">
+      Yes
+    </button>
+
+    <button id="cancelDeleteBtn">
+      No
+    </button>
+
+  </div>
+
+
 
   <!-- SCRIPT -->
 
-  <script
-  type="module"
-
-  src="material.js">
+  <script type="module" src="material.js">
 
   </script>
 
