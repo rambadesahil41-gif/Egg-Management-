@@ -1,36 +1,19 @@
 import { db } from "./firebase.js";
 
 import {
-
   collection,
   getDocs
-
-} from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // =========================
 // MONTHS
 // =========================
 
-let months = [
-
+const months = [
   "Jan","Feb","Mar","Apr",
-
   "May","Jun","Jul","Aug",
-
   "Sep","Oct","Nov","Dec"
-
 ];
-
-// =========================
-// DATA STORE
-// =========================
-
-let monthlyProfit =
-new Array(12).fill(0);
-
-let monthlyExpense =
-new Array(12).fill(0);
 
 // =========================
 // LOAD REPORT
@@ -39,75 +22,69 @@ new Array(12).fill(0);
 async function loadReport() {
 
   let totalProfit = 0;
-
   let totalExpense = 0;
 
-  // =========================
-  // GET ORDERS FROM FIREBASE
-  // =========================
+  let monthlyProfit = new Array(12).fill(0);
+  let monthlyExpense = new Array(12).fill(0);
 
   try {
 
-    const orderSnapshot =
-    await getDocs(
+    // =========================
+    // ORDERS (PROFIT)
+    // =========================
 
-      collection(db,"orders")
-
+    const orderSnapshot = await getDocs(
+      collection(db, "orders")
     );
 
-    orderSnapshot.forEach(doc => {
+    orderSnapshot.forEach(docItem => {
 
-      let order = doc.data();
-
-      // ONLY COMPLETE + PAID
+      const order = docItem.data();
 
       if (
-
         order.status === "Complete" &&
-
         order.moneyStatus === "Paid"
-
       ) {
 
-        let month =
+        if (order.date) {
 
-        new Date(
-          order.date
-        ).getMonth();
+          const month =
+            new Date(order.date).getMonth();
 
-        monthlyProfit[month] +=
+          monthlyProfit[month] +=
+            Number(order.total || 0);
 
-        Number(order.total);
+        }
 
       }
 
     });
 
     // =========================
-    // GET MATERIALS FROM FIREBASE
+    // MATERIALS (EXPENSE)
     // =========================
 
-    const materialSnapshot =
-    await getDocs(
-
-      collection(db,"materials")
-
+    const materialSnapshot = await getDocs(
+      collection(db, "materials")
     );
 
-    materialSnapshot.forEach(doc => {
+    materialSnapshot.forEach(docItem => {
 
-      let material = doc.data();
+      const material = docItem.data();
 
-      // CURRENT MONTH
+      if (material.materialDate) {
 
-      let month =
-      new Date().getMonth();
+        const month =
+          new Date(
+            material.materialDate
+          ).getMonth();
 
-      monthlyExpense[month] +=
+        monthlyExpense[month] +=
+          Number(
+            material.overallPrice || 0
+          );
 
-      Number(
-        material.overallPrice
-      );
+      }
 
     });
 
@@ -115,159 +92,111 @@ async function loadReport() {
     // TABLE
     // =========================
 
-    let reportTable =
-
-    document.getElementById(
-      "reportTable"
-    );
+    const reportTable =
+      document.getElementById(
+        "reportTable"
+      );
 
     reportTable.innerHTML = "";
 
-    months.forEach(
-      (month,index)=>{
+    months.forEach((month, index) => {
 
-        let profit =
+      const profit =
         monthlyProfit[index];
 
-        let expense =
+      const expense =
         monthlyExpense[index];
 
-        let balance =
+      const balance =
         profit - expense;
 
-        totalProfit += profit;
+      totalProfit += profit;
+      totalExpense += expense;
 
-        totalExpense += expense;
-
-        reportTable.innerHTML += `
-
-          <tr>
-
-            <td>
-
-              ${month}
-
-            </td>
-
-            <td>
-
-              ₹${profit}
-
-            </td>
-
-            <td>
-
-              ₹${expense}
-
-            </td>
-
-            <td>
-
-              ₹${balance}
-
-            </td>
-
-          </tr>
-
-        `;
-
-      }
-    );
+      reportTable.innerHTML += `
+        <tr>
+          <td>${month}</td>
+          <td>₹${profit.toFixed(2)}</td>
+          <td>₹${expense.toFixed(2)}</td>
+          <td>₹${balance.toFixed(2)}</td>
+        </tr>
+      `;
+    });
 
     // =========================
-    // SHOW TOTALS
+    // TOTALS
     // =========================
 
     document.getElementById(
-
       "totalProfit"
-
     ).innerText =
-    totalProfit;
+      `${totalProfit.toFixed(2)}`;
 
     document.getElementById(
-
       "totalExpense"
-
     ).innerText =
-    totalExpense;
+      `${totalExpense.toFixed(2)}`;
 
     document.getElementById(
-
       "netBalance"
-
     ).innerText =
-
-    totalProfit -
-    totalExpense;
+      `${(
+        totalProfit - totalExpense
+      ).toFixed(2)}`;
 
     // =========================
-    // GRAPH
+    // CHART
     // =========================
 
-    new Chart(
-
+    const chartCanvas =
       document.getElementById(
         "financeChart"
-      ),
+      );
 
-      {
+    if (window.financeChartInstance) {
+      window.financeChartInstance.destroy();
+    }
 
-        type:"bar",
+    window.financeChartInstance =
+      new Chart(chartCanvas, {
 
-        data:{
+        type: "bar",
 
-          labels:months,
+        data: {
 
-          datasets:[
+          labels: months,
+
+          datasets: [
 
             {
-
-              label:"Profit",
-
-              data:
-              monthlyProfit,
-
-              backgroundColor:
-              "#28a745"
-
+              label: "Profit",
+              data: monthlyProfit,
+              backgroundColor: "#28a745"
             },
 
             {
-
-              label:"Expense",
-
-              data:
-              monthlyExpense,
-
-              backgroundColor:
-              "#dc3545"
-
+              label: "Expense",
+              data: monthlyExpense,
+              backgroundColor: "#dc3545"
             }
 
           ]
 
         },
 
-        options:{
-
-          responsive:true
-
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
         }
 
-      }
-
-    );
+      });
 
   }
 
-  catch(error){
+  catch (error) {
 
-    console.log(error);
-
-    alert(
-      error.message
-    );
+    console.error(error);
+    alert(error.message);
 
   }
 
