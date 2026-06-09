@@ -214,6 +214,13 @@
         Complete Orders
 
       </h2>
+      <div class="filter-box">
+
+        <input type="text" id="searchCustomer" placeholder="Search Customer Name">
+
+        <input type="date" id="filterDate">
+
+      </div>
 
       <table>
 
@@ -250,9 +257,34 @@
         </tbody>
 
       </table>
+      <button id="viewMoreBtn" style="display:none;">
+        View More
+      </button>
 
     </div>
 
+  <div id="viewMoreCompleteContainer" style="text-align: center; margin-top: 15px; display: none;">
+  
+  <button
+    id="viewMoreCompleteBtn"
+    class="done-btn"
+    style="
+      background: linear-gradient(135deg, #ff9800, #ff6f00);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.35);
+    "
+  >
+    View More
+  </button>
+
+</div>
+
+ 
     <!-- TOTAL PROFIT -->
 
     <div class="profit-box">
@@ -272,9 +304,28 @@
     </div>
 
   </div>
+
   <div id="toast">
 
   </div>
+
+  <div id="deleteToast" class="delete-toast">
+
+    <span>
+      Delete this order?
+    </span>
+
+    <button id="confirmDeleteBtn">
+      Yes
+    </button>
+
+    <button id="cancelDeleteBtn">
+      No
+    </button>
+
+  </div>
+
+
 
   <!-- SCRIPT -->
 
