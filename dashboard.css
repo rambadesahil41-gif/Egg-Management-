@@ -442,59 +442,138 @@ table tr:hover {
 
 }
 
+/* =========================
+   DELETE TOAST POPUP
+========================= */
+
 .delete-toast{
   position:fixed;
   top:50%;
   left:50%;
   transform:translate(-50%, -50%);
-  background:#333;
-  color:white;
-  padding:20px;
-  border-radius:10px;
+
+  background:#ffffff;
+  color:#222;
+
+  padding:22px 28px;
+  border-radius:14px;
+
   display:none;
   align-items:center;
-  gap:10px;
+  gap:12px;
+
+  min-width:320px;
+
+  border-top:5px solid #ff6600;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.20);
+
   z-index:9999;
-  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+
+  animation:popupShow 0.25s ease;
 }
 
 .delete-toast.show{
   display:flex;
 }
 
-#confirmDeleteBtn {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
+.delete-toast span{
+  flex:1;
+  font-size:16px;
+  font-weight:600;
 }
 
-#cancelDeleteBtn {
-  background: #6c757d;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
+/* YES BUTTON */
+
+#confirmDeleteBtn{
+  background:#ff6600;
+  color:white;
+  border:none;
+
+  padding:10px 16px;
+  border-radius:8px;
+
+  cursor:pointer;
+  font-weight:bold;
+
+  transition:0.3s;
 }
+
+#confirmDeleteBtn:hover{
+  background:#e65c00;
+  transform:translateY(-2px);
+}
+
+/* NO BUTTON */
+
+#cancelDeleteBtn{
+  background:#e9ecef;
+  color:#333;
+  border:none;
+
+  padding:10px 16px;
+  border-radius:8px;
+
+  cursor:pointer;
+  font-weight:bold;
+
+  transition:0.3s;
+}
+
+#cancelDeleteBtn:hover{
+  background:#d6dbe0;
+}
+
+/* =========================
+   FILTER BOX
+========================= */
+
 .filter-box{
   display:flex;
-  gap:10px;
-  margin:15px 0;
+  gap:12px;
+  margin:18px 0;
+  flex-wrap:wrap;
 }
 
 .filter-box input{
-  padding:10px;
-  border:1px solid #ccc;
-  border-radius:8px;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:15px;
+  outline:none;
+  transition:0.3s;
+}
+
+.filter-box input:focus{
+  border-color:#ff6600;
+  box-shadow:0 0 6px rgba(255,102,0,0.25);
 }
 
 #searchCustomer{
-  width:250px;
+  width:260px;
 }
 
 #filterDate{
-  width:180px;
+  width:190px;
+}
+
+/* =========================
+   POPUP ANIMATION
+========================= */
+
+@keyframes popupShow{
+  from{
+    opacity:0;
+    transform:
+      translate(-50%, -50%)
+      scale(0.9);
+  }
+
+  to{
+    opacity:1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
 }
