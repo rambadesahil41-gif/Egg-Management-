@@ -117,6 +117,27 @@ async function loadOrders() {
       orders.push({ id: docItem.id, ...docItem.data() });
     });
 
+   const completeCount = orders.filter(
+  order =>
+    order.status === "Complete" &&
+    order.moneyStatus === "Paid"
+).length;
+
+const pendingCount = orders.filter(
+  order =>
+    order.status === "Pending" ||
+    order.moneyStatus === "Pending"
+).length;
+
+document.getElementById("totalOrders").innerText =
+  orders.length;
+
+document.getElementById("completeOrders").innerText =
+  completeCount;
+
+document.getElementById("pendingOrders").innerText =
+  pendingCount;
+
     // EMPTY DATA
     if (orders.length === 0) {
       if (pendingTable) pendingTable.innerHTML = `<tr><td colspan="10" style="text-align:center;">No Orders Found</td></tr>`;
